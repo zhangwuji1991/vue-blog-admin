@@ -11,7 +11,7 @@
       </el-col>
       <el-col :span="4" class="userinfo">
         <el-dropdown trigger="hover">
-          <span class="el-dropdown-link userinfo-inner"><img src="http://image.baidu.com/search/detail?ct=503316480&z=0&ipn=d&word=%E5%9B%BE%E7%89%87&hs=0&pn=2&spn=0&di=73677008950&pi=0&rn=1&tn=baiduimagedetail&is=3188408375%2C2080300987&ie=utf-8&oe=utf-8&cl=2&lm=-1&cs=572754916%2C1511283671&os=2999534745%2C2066899940&simid=0%2C0&adpicid=0&lpn=0&ln=30&fr=ala&fm=&sme=&cg=&bdtype=17&oriquery=&objurl=http%3A%2F%2Fe.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F1e30e924b899a9018081292b17950a7b0208f573.jpg&fromurl=ippr_z2C%24qAzdH3FAzdH3Fowssrwrj6_z%26e3Brv5gstgj_z%26e3Bv54_z%26e3BvgAzdH3Frtvf576vjAzdH3F8c809_88_z%26e3Bip4s&gsm=" />{{this.sysUserName}}</span>
+          <span class="el-dropdown-link userinfo-inner"><img :src="'http://localhost:8888'+this.user.headImg" />{{this.user.username}}</span>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item>我的消息</el-dropdown-item>
             <el-dropdown-item>设置</el-dropdown-item>
@@ -78,7 +78,7 @@
       return {
         sysName:'走过你的时光',
         collapsed:false,
-        sysUserName: '',
+        user: [],
         sysUserAvatar: '',
         form: {
           name: '',
@@ -131,7 +131,8 @@
       if (user) {
         user = JSON.parse(user);
         console.log(user)
-        this.sysUserName = user || '';
+        this.user = user || '';
+        console.log(this.user.username)
         // this.sysUserAvatar = user.avatar || '';
       }
 

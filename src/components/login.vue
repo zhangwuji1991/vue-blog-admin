@@ -68,10 +68,10 @@ export default {
               if(response.data.code == 0){
                 //跳转页面
                 this.logining = true;
-                sessionStorage.setItem("user", JSON.stringify(response.data.userInfo.username)); 
+                sessionStorage.setItem("user", JSON.stringify(response.data.userInfo)); 
                 
                 setTimeout(() => {
-                  this.$router.push({ path: '/' });
+                  this.$router.push({ path: '/table' });
                 },500)
               }
               else{
