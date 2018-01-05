@@ -35,9 +35,10 @@ let routes = [
         iconCls: 'fa fa-address-card',//图标样式class
         children: [
             { path: '/main', component: Main, name: '主页', hidden: true },
-            { path: '/table', component: Table, name: '用户' },
-            { path: '/form', component: Form, name: 'Form' },
-            { path: '/user', component: user, name: '列表' },
+
+            { path: '/user', component: user, name: '用户' },
+                        { path: '/table', component: Table, name: '列表' },
+            { path: '/form', component: Form, name: 'Form' }
         ]
     },
     {

@@ -71,7 +71,7 @@ export default {
                 sessionStorage.setItem("user", JSON.stringify(response.data.userInfo)); 
                 
                 setTimeout(() => {
-                  this.$router.push({ path: '/table' });
+                  this.$router.push({ path: '/user' });
                 },500)
               }
               else{
@@ -87,6 +87,10 @@ export default {
             })
             .catch((error)=> {
               console.log(error)
+              this.$message({
+                  message: "网络链接失败",
+                  type: 'error'
+                });
             })
         }else{
           console.log('error submit!!');
