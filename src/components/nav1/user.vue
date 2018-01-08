@@ -27,9 +27,12 @@
 				</el-table-column>
 				<el-table-column prop="birth" label="注册时间" width="120" sortable>
 				</el-table-column>
-				<el-table-column prop="isAdmin" label="是否为管理员" min-width="180">
+				<el-table-column prop="isAdmin" label="是否为管理员" min-width="180" :formatter="formatAdmin" sortable>
 				</el-table-column>
+				
 			</el-table>
+			<el-pagination layout="prev, pager, next" :total=this.total :page-size=this.pages @current-change="handleCurrentChange"></el-pagination>
+
 		</template>
 
 	</section>
@@ -44,27 +47,36 @@
 					name: ''
 				},
 				loading: false,
-				users: []
+				users: [],
+				total: 0,
+				page: 1,
+				pages: 8   //每页显示条数
 			}
 		},
 		methods: {
-			//性别显示转换
-			// formatSex: function (row, column) {
-			// 	return row.sex == 1 ? '男' : row.sex == 0 ? '女' : '未知';
-			// },
+			//管理员显示转换
+			formatAdmin: function (row, column) {
+				return row.isAdmin == true ? '是' : row.isAdmin == false ? '否' : '未知';
+			},
+			handleCurrentChange(val) {
+				this.page = val;
+				this.getUser();
+			},
 			//获取用户列表
 			getUser: function () {
 				console.log(1)
 				let para = {
-					username: this.filters.name
+					username: this.filters.name,
+					page:     this.page,
+					pages:    this.pages
 				};
 				this.loading = true;
-				console.log(para)
 				NProgress.start();
 				setTimeout(() => {
 	                 getusers(para).then((res) => {
-						console.log(res.data)
+						console.log(res)
 						this.users = res.data;
+						this.total = res.lengths;
 						this.loading = false;
 						NProgress.done();
 					});
