@@ -226,6 +226,7 @@
 							this.editLoading = true;
 							//NProgress.start();
 							let para = Object.assign({}, this.editForm);
+							console.log(para)
 							para.birth = (!para.birth || para.birth == '') ? '' : util.formatDate.format(new Date(para.birth), 'yyyy-MM-dd');
 							editUser(para).then((res) => {
 								this.editLoading = false;

@@ -17,7 +17,7 @@
         </el-form-item>
         <el-checkbox v-model="checked" checked class="remember">记住密码</el-checkbox>
         <el-form-item style="width:100%;">
-          <el-button type="primary" style="width:100%;" @click.native.prevent="logins" :loading="logining">登录</el-button>
+          <el-button type="primary" style="width:100%;" @click.native.prevent="dd" :loading="logining">登录</el-button>
           <!--<el-button @click.native.prevent="handleReset2">重置</el-button>-->
         </el-form-item>
       </el-form>
@@ -25,8 +25,7 @@
   </div>
 </template>
 <script>
-import axios from 'axios'
-import qs    from 'qs'
+import { requestLogin } from '@/api/api';
 export default {
   name: 'HelloWorld',
   data () {
@@ -34,12 +33,10 @@ export default {
       logining: false,
       msg: 'Welcome to Your Vude.js App',
       checked: true,
-      errors:'',
       dl: {
         username: '',
         password: ''
       },
-      dlUrl: 'http://localhost:8888/api/user/login',
       rules2: {
         username: [
           { required: true, message: '请输入账号', trigger: 'blur' },
@@ -97,6 +94,41 @@ export default {
             return false;
         }
       });
+    },
+    dd() {
+      var _this = this;
+        this.$refs.dl.validate((valid) => {
+          if (valid) {
+            //_this.$router.replace('/table');
+            this.logining = true;
+            console.log(this.dl.username)
+            var loginParams = { username: this.dl.username, password: this.dl.password };
+            requestLogin(loginParams).then(data => {
+              
+              //NProgress.done();
+              console.log(data)
+              let { message, code, userInfo } = data;
+              console.log(code)
+              if (code !== 0) {
+                // console.log(userInfo)
+                this.$message({
+                  message: data.message,
+                  type: 'error'
+                });
+                this.logining = false; 
+              } else {
+                sessionStorage.setItem('user', JSON.stringify(userInfo));
+                // 成功之后跳转页面
+                setTimeout(() => {
+                  this.$router.push({ path: '/user' });
+                },500)
+              }
+            });
+          } else {
+            console.log('error submit!!');
+            return false;
+          }
+        });
     }
   }
 }
