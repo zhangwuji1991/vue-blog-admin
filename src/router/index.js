@@ -4,8 +4,8 @@ import Login from '@/components/login'
 import NotFound from '@/components/404'
 import Home from '@/components/home'
 import Main from '@/components/Main'
-import Table from '@/components/nav1/Table'
-import Form from '@/components/nav1/Form'
+import Bz from '@/components/nav1/Bz'
+import Form from '@/components/nav1/form'
 import user from '@/components/nav1/user'
 import Page4 from '@/components/nav2/Page4'
 import Page5 from '@/components/nav2/Page5'
@@ -37,7 +37,7 @@ let routes = [
             { path: '/main', component: Main, name: '主页', hidden: true },
 
             { path: '/user', component: user, name: '用户' },
-                        { path: '/table', component: Table, name: '列表' },
+             { path: '/Bz', component: Bz, name: '壁纸' },
             { path: '/form', component: Form, name: 'Form' }
         ]
     },
