@@ -26,3 +26,6 @@ export const Addusers = params => { return axios.post(`${base}/adduser`,  qs.str
 export const getbzs = params => { return axios.post(`${base}/bzdata`,  qs.stringify(params),heads).then(res => res.data); };         
 // 增添壁纸
 export const addbzs = params => { return axios.post(`${base}/bzadds`,  qs.stringify(params),heads).then(res => res.data); };         
+
+export const imgs = params => { return axios.post(`${base}/imgs`,  qs.stringify(params),heads).then(res => res.data); };         
+

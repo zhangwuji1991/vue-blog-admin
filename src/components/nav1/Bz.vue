@@ -26,7 +26,7 @@
 				</el-table-column>
 				<el-table-column prop="content" label="独白"  >
 				</el-table-column>
-				<el-table-column prop="bzImg" label="壁纸">
+				<el-table-column prop="bzImg"  label="壁纸">		
 				</el-table-column>
 				<el-table-column prop="addTime" :formatter="dateFormat"   label="发表时间"  sortable>
 				</el-table-column>
@@ -35,16 +35,15 @@
 					<el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
 					<el-button type="danger" size="small" @click="handleDel(scope.$index, scope.row)">删除</el-button>
 				</template> -->
-			</el-table-column>
+			    <!-- </el-table-column> -->
 			</el-table>
+			<!-- 分页 -->
 			<el-pagination layout="prev, pager, next" :total=this.total :page-size=this.pages @current-change="handleCurrentChange"></el-pagination>
-			
-
 			<!-- 新增页面 -->
 			<el-dialog title="新增壁纸" v-model="addFormVisible" :close-on-click-modal="false">
 				<el-form :model="addForm" label-width="80px" :rules="addFormRules" ref="addForm">
 					<el-form-item label="城市" prop="city">
-						<el-input v-model="addForm.city" auto-complete="off"></el-input>
+						<el-input v-model="addForm.city" disabled="disabled" auto-complete="off"></el-input>
 					</el-form-item>
 					<el-form-item label="独白"  prop="content">
 						<el-input v-model="addForm.content" auto-complete="off"></el-input>
@@ -54,7 +53,7 @@
 						  class="avatar-uploader"
 						  name="avatar"
 						  action="http://localhost:8888/vue/bzadd"
-						  :show-file-list="false"
+						  :show-file-list="true"
 						  
 						  :on-success="handleAvatarSuccess"
 						  :on-preview="bzadds"
@@ -131,11 +130,8 @@
 			//显示新增界面
 			handleAdd: function () {
 				this.addFormVisible = true;
-				// this.addForm = {
-				// 	username:'',
-					
-				// 	password:''
-				// };
+				var city = remote_ip_info['city'];
+                this.addForm.city = city + '市'
 			},
 			//新增
 			//时间格式化  
@@ -204,6 +200,7 @@
 					page:     this.page,
 					pages:    this.pages
 				};
+
 				this.loading = true;
 				NProgress.start();
 				setTimeout(() => {

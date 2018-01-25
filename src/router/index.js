@@ -5,8 +5,9 @@ import NotFound from '@/components/404'
 import Home from '@/components/home'
 import Main from '@/components/Main'
 import Bz from '@/components/nav1/Bz'
-import Form from '@/components/nav1/form'
+import Imgs from '@/components/nav1/img'
 import user from '@/components/nav1/user'
+import blong from '@/components/nav1/blong'
 import Page4 from '@/components/nav2/Page4'
 import Page5 from '@/components/nav2/Page5'
 import Page8 from '@/components/nav2/Page8'
@@ -36,9 +37,10 @@ let routes = [
         children: [
             { path: '/main', component: Main, name: '主页', hidden: true },
 
-            { path: '/user', component: user, name: '用户' },
-             { path: '/Bz', component: Bz, name: '壁纸' },
-            { path: '/form', component: Form, name: 'Form' }
+            { path: '/user',  component:  user, name: '用户' },
+            { path: '/Bz',    component:  Bz,   name: '壁纸' },
+            { path: '/imgs',  component:  Imgs, name: '图片' },
+            { path: '/blong', component:  blong, name: '博客' }
         ]
     },
     {

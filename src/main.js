@@ -9,10 +9,23 @@ import store from '@/vuex/store'
 import Vuex from 'vuex'
 import routes from '@/router/index'
 import 'font-awesome/css/font-awesome.min.css'
+
 Vue.config.productionTip = false
 Vue.use(ElementUI)
 Vue.use(VueRouter)
 Vue.use(Vuex)
+import VueLazyload from 'vue-lazyload'
+
+//use custom directive
+Vue.use(VueLazyload)
+
+// use options
+Vue.use(VueLazyload, {
+  preLoad: 1.3,
+  error: 'dist/error.png',
+  loading: 'http://img.lanrentuku.com/img/allimg/1212/5-121204193R0-50.gif',
+  attempt: 1
+})
 
 //NProgress.configure({ showSpinner: false });
 
