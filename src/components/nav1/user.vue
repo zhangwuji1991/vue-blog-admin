@@ -10,7 +10,7 @@
 					<el-button type="primary" v-on:click="getUser">查询</el-button>
 				</el-form-item>
 				<el-form-item>
-					<el-button type="primary" @click="handleAdd">新增</el-button>
+					<el-button type="primary" v-on:click="handleAdd">新增</el-button>
 				</el-form-item>
 			</el-form>
 		</el-col>
@@ -33,7 +33,7 @@
 				<el-table-column prop="isAdmin" label="是否为管理员" min-width="180" :formatter="formatAdmin" sortable>
 				</el-table-column>
 				<el-table-column label="操作" width="150">
-				<template scope="scope">
+				<template slot-scope="scope">
 					<el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
 					<el-button type="danger" size="small" @click="handleDel(scope.$index, scope.row)">删除</el-button>
 				</template>
@@ -41,7 +41,7 @@
 			</el-table>
 			<el-pagination layout="prev, pager, next" :total=this.total :page-size=this.pages @current-change="handleCurrentChange"></el-pagination>
 			<!--编辑界面-->
-			<el-dialog title="编辑" v-model="editFormVisible" :close-on-click-modal="false">
+			<el-dialog title="编辑" :visible.sync="editFormVisible" :close-on-click-modal="false">
 				<el-form :model="editForm" label-width="80px" :rules="editFormRules" ref="editForm">
 					<el-form-item label="id" prop="_id">
 						<el-input v-model="editForm._id" :disabled="true"> auto-complete="off"></el-input>
@@ -66,7 +66,7 @@
 			</el-dialog>
 
 			<!-- 新增页面 -->
-			<el-dialog title="新增用户" v-model="addFormVisible" :close-on-click-modal="false">
+			<el-dialog title="新增用户" :visible.sync="addFormVisible" :close-on-click-modal="false">
 				<el-form :model="addForm" label-width="80px" :rules="addFormRules" ref="addForm">
 					<el-form-item label="用户名" prop="username">
 						<el-input v-model="addForm.username" auto-complete="off"></el-input>
@@ -257,11 +257,12 @@
 					page:     this.page,
 					pages:    this.pages
 				};
-				this.loading = true;
+				// this.loading = true;
 				NProgress.start();
 				setTimeout(() => {
 	                 getusers(para).then((res) => {
 						this.users = res.data;
+						console.log(res.data)
 						this.total = res.lengths;
 						this.loading = false;
 						NProgress.done();

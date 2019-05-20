@@ -1,4 +1,15 @@
 <template>
-	<section>page6...
-	</section>
+	<div>
+		<Echarts/>
+	</div>
 </template>
+
+<script>
+	import Echarts from '@/components/charts/echarts'
+	export default{
+		components:{
+			Echarts
+		}
+	}
+
+</script>

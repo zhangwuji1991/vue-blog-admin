@@ -2,7 +2,7 @@ import axios from 'axios';
 import qs    from 'qs';
 
 //请求ip地址
-let base = 'http://localhost:8888/vue';
+let base = 'http://21.254.181.14:8083/vue';
 //设置跨域
 let heads = {
 				 headers: {
@@ -27,5 +27,15 @@ export const getbzs = params => { return axios.post(`${base}/bzdata`,  qs.string
 // 增添壁纸
 export const addbzs = params => { return axios.post(`${base}/bzadds`,  qs.stringify(params),heads).then(res => res.data); };         
 
+//获取上传的所有图片//
 export const imgs = params => { return axios.post(`${base}/imgs`,  qs.stringify(params),heads).then(res => res.data); };         
 
+//删除上传过没用的图片
+export const delimg = params => { return axios.post(`${base}/deleimgs`,  qs.stringify(params),heads).then(res => res.data); };         
+
+
+//视频请求地址 ：https://api.douban.com/v2/movie/in_theaters?count=10&start=10
+//  coutn每页数量  start下一页
+const ulrs = 'https://api.douban.com/v2/movie/in_theaters?'
+
+export const movies = params => { return axios.get(ulrs,  qs.stringify(params),heads).then(res => res.data); };         

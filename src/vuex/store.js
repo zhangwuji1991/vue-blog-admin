@@ -7,7 +7,8 @@ Vue.use(Vuex)
 
 // 应用初始状态
 const state = {
-    count: 10
+    count: 10,
+    a:20
 }
 
 // 定义所需的 mutations
@@ -16,6 +17,9 @@ const mutations = {
         state.count++
     },
     DECREMENT(state) {
+        state.count--
+    },
+    FOOM(state){
         state.count--
     }
 }

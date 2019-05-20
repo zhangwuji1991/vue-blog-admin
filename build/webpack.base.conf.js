@@ -42,7 +42,8 @@ module.exports = {
         include: [  
           /src/,//表示在src目录下的css需要编译  
           '/node_modules/element-ui/lib/',   //增加此项  
-          '/node_modules/font-awesome/css/'
+          '/node_modules/font-awesome/css/',
+          '/node_modules/photo/css/'
           
         ],  
         loader: 'style-loader!css-loader'  

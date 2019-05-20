@@ -40,7 +40,7 @@
 			<!-- 分页 -->
 			<el-pagination layout="prev, pager, next" :total=this.total :page-size=this.pages @current-change="handleCurrentChange"></el-pagination>
 			<!-- 新增页面 -->
-			<el-dialog title="新增壁纸" v-model="addFormVisible" :close-on-click-modal="false">
+			<el-dialog title="新增壁纸" :visible.sync="addFormVisible" :close-on-click-modal="false">
 				<el-form :model="addForm" label-width="80px" :rules="addFormRules" ref="addForm">
 					<el-form-item label="城市" prop="city">
 						<el-input v-model="addForm.city" disabled="disabled" auto-complete="off"></el-input>
@@ -203,14 +203,12 @@
 
 				this.loading = true;
 				NProgress.start();
-				setTimeout(() => {
-	                 getbzs(para).then((res) => {
-						this.bz = res.data;
-						this.total = res.lengths;
-						this.loading = false;
-						NProgress.done();
-					});
-                },300)				
+                getbzs(para).then((res) => {
+					this.bz = res.data;
+					this.total = res.lengths;
+					this.loading = false;
+					NProgress.done();
+				});			
 			}
 		},
 		mounted() {
